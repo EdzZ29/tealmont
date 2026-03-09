@@ -1,9 +1,9 @@
 [phases.setup]
-nixPkgs = ['php82', 'php82Extensions.pgsql', 'php82Extensions.pdo_pgsql', 'php82Extensions.gd', 'php82Extensions.mbstring', 'php82Extensions.xml', 'php82Extensions.curl', 'php82Extensions.fileinfo', 'php82Extensions.tokenizer', 'php82Extensions.bcmath', 'php82Extensions.zip']
+nixPkgs = ['php82', 'php82Extensions.pgsql', 'php82Extensions.pdo_pgsql', 'php82Extensions.gd', 'php82Extensions.mbstring', 'php82Extensions.xml', 'php82Extensions.curl', 'php82Extensions.fileinfo', 'php82Extensions.tokenizer', 'php82Extensions.bcmath']
 [phases.install]
 cmds = [
     'mkdir -p /etc/php',
-    'echo "memory_limit=256M\nupload_max_filesize=20M\npost_max_size=25M\nextension=pdo_pgsql\nextension=pgsql\nextension=gd\nextension=mbstring\nextension=xml\nextension=curl\nextension=fileinfo\nextension=bcmath\nextension=zip" > /etc/php/php.ini',
+    'echo "memory_limit=256M\nupload_max_filesize=20M\npost_max_size=25M\nextension=pdo_pgsql\nextension=pgsql\nextension=gd\nextension=mbstring\nextension=xml\nextension=curl\nextension=fileinfo\nextension=bcmath" > /etc/php/php.ini',
     'composer install --no-dev --optimize-autoloader',
     'npm ci',
     'npm run build'

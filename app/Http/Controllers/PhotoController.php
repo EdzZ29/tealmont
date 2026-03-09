@@ -86,10 +86,6 @@ class PhotoController extends Controller
 
     public function download(Photo $photo, Request $request)
     {
-        if ($photo->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
-            abort(403);
-        }
-
         $filePath = Storage::disk('public')->path($photo->path);
 
         return response()->download($filePath, $photo->filename);

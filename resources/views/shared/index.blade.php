@@ -29,18 +29,22 @@
     @else
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($albums as $album)
-                <a href="{{ route('albums.show', $album) }}" class="bg-white rounded-lg shadow-sm border border-gray-200 hover:border-teal-300 hover:shadow-md transition-all overflow-hidden group">
-                    <div class="h-40 bg-gray-100 flex items-center justify-center">
-                        @if($album->photos->first())
-                            <img src="{{ asset('storage/' . $album->photos->first()->path) }}" alt="" class="w-full h-full object-cover">
-                        @else
-                            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                            </svg>
-                        @endif
-                    </div>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:border-teal-300 hover:shadow-md transition-all overflow-hidden group">
+                    <a href="{{ route('albums.show', $album) }}">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            @if($album->photos->first())
+                                <img src="{{ asset('storage/' . $album->photos->first()->path) }}" alt="" class="w-full h-full object-cover">
+                            @else
+                                <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                </svg>
+                            @endif
+                        </div>
+                    </a>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 group-hover:text-teal-600 transition-colors">{{ $album->name }}</h3>
+                        <a href="{{ route('albums.show', $album) }}">
+                            <h3 class="font-semibold text-gray-900 group-hover:text-teal-600 transition-colors">{{ $album->name }}</h3>
+                        </a>
                         @if($album->description)
                             <p class="mt-1 text-sm text-gray-500 truncate">{{ $album->description }}</p>
                         @endif
@@ -53,8 +57,18 @@
                                 {{ $album->user->name }}
                             </span>
                         </div>
+                        @if($album->photos_count > 0)
+                        <div class="mt-3 pt-3 border-t border-gray-100">
+                            <a href="{{ route('albums.download', $album) }}" class="inline-flex items-center gap-1.5 text-xs font-medium text-teal-600 hover:text-teal-700 transition-colors">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download ZIP
+                            </a>
+                        </div>
+                        @endif
                     </div>
-                </a>
+                </div>
             @endforeach
         </div>
     @endif
