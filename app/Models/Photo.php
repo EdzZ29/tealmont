@@ -15,7 +15,18 @@ class Photo extends Model
         'user_id',
         'filename',
         'path',
+        'latitude',
+        'longitude',
+        'address',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'latitude' => 'decimal:7',
+            'longitude' => 'decimal:7',
+        ];
+    }
 
     public function album(): BelongsTo
     {

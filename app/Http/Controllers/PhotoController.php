@@ -22,6 +22,9 @@ class PhotoController extends Controller
         $validated = $request->validate([
             'album_id' => ['required', 'exists:albums,id'],
             'photo' => ['required', 'string'],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
+            'address' => ['nullable', 'string', 'max:500'],
         ]);
 
         $album = Album::findOrFail($validated['album_id']);
@@ -51,9 +54,23 @@ class PhotoController extends Controller
             'user_id' => $request->user()->id,
             'filename' => $filename,
             'path' => $path,
+            'latitude' => $validated['latitude'] ?? null,
+            'longitude' => $validated['longitude'] ?? null,
+            'address' => $validated['address'] ?? null,
         ]);
 
         return redirect()->route('albums.show', $album)->with('success', 'Photo saved successfully.');
+    }
+
+    public function show(Photo $photo, Request $request)
+    {
+        if ($photo->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            abort(403);
+        }
+
+        $photo->load('album', 'user');
+
+        return view('photos.show', compact('photo'));
     }
 
     public function destroy(Photo $photo, Request $request)
