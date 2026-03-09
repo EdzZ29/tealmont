@@ -73,6 +73,32 @@ class PhotoController extends Controller
         return view('photos.show', compact('photo'));
     }
 
+    public function update(Photo $photo, Request $request)
+    {
+        if ($photo->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'filename' => ['required', 'string', 'max:255'],
+        ]);
+
+        $photo->update(['filename' => $validated['filename']]);
+
+        return back()->with('success', 'Filename updated successfully.');
+    }
+
+    public function download(Photo $photo, Request $request)
+    {
+        if ($photo->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+            abort(403);
+        }
+
+        $filePath = Storage::disk('public')->path($photo->path);
+
+        return response()->download($filePath, $photo->filename);
+    }
+
     public function destroy(Photo $photo, Request $request)
     {
         if ($photo->user_id !== $request->user()->id && !$request->user()->isAdmin()) {

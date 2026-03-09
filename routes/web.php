@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/photos/capture', [PhotoController::class, 'create'])->name('photos.create');
     Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
     Route::get('/photos/{photo}', [PhotoController::class, 'show'])->name('photos.show');
+    Route::patch('/photos/{photo}', [PhotoController::class, 'update'])->name('photos.update');
+    Route::get('/photos/{photo}/download', [PhotoController::class, 'download'])->name('photos.download');
     Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->name('photos.destroy');
 
     // Admin-only routes
