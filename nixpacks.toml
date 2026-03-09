@@ -10,4 +10,4 @@ cmds = [
 ]
 
 [start]
-cmd = 'php artisan migrate --force && php artisan optimize && php -S 0.0.0.0:${PORT:-8080} -t public'
+cmd = 'php artisan migrate --force && php artisan optimize && mkdir -p storage/app/temp && php -c /etc/php/php.ini -S 0.0.0.0:${PORT:-8080} -t public'
