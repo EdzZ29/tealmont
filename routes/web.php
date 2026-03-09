@@ -4,6 +4,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\SharedController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,10 +23,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Shared Photos
+    Route::get('/shared', [SharedController::class, 'index'])->name('shared.index');
+
     // Albums
     Route::get('/albums', [AlbumController::class, 'index'])->name('albums.index');
     Route::post('/albums', [AlbumController::class, 'store'])->name('albums.store');
     Route::get('/albums/{album}', [AlbumController::class, 'show'])->name('albums.show');
+    Route::get('/albums/{album}/download', [AlbumController::class, 'download'])->name('albums.download');
     Route::delete('/albums/{album}', [AlbumController::class, 'destroy'])->name('albums.destroy');
 
     // Photos

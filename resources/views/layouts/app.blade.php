@@ -19,6 +19,11 @@
                         <img src="{{ asset('image/tealmont-logo.jpg') }}" alt="Tealmont" class="h-8 w-auto">
                         <span class="text-xl font-bold text-gray-900">Tealmont</span>
                     </a>
+                    <div class="hidden sm:flex items-center ml-8 gap-6">
+                        <a href="{{ route('dashboard') }}" class="text-sm font-medium {{ request()->routeIs('dashboard') ? 'text-teal-600' : 'text-gray-500 hover:text-gray-700' }} transition-colors">Dashboard</a>
+                        <a href="{{ route('albums.index') }}" class="text-sm font-medium {{ request()->routeIs('albums.*') ? 'text-teal-600' : 'text-gray-500 hover:text-gray-700' }} transition-colors">My Albums</a>
+                        <a href="{{ route('shared.index') }}" class="text-sm font-medium {{ request()->routeIs('shared.*') ? 'text-teal-600' : 'text-gray-500 hover:text-gray-700' }} transition-colors">Shared</a>
+                    </div>
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="text-sm text-gray-500">

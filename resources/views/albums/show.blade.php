@@ -25,6 +25,14 @@
                 </svg>
                 Take Photo
             </a>
+            @if($album->photos->count())
+            <a href="{{ route('albums.download', $album) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 text-teal-600 text-sm font-medium rounded-lg hover:bg-teal-100 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download ZIP
+            </a>
+            @endif
             <form method="POST" action="{{ route('albums.destroy', $album) }}" onsubmit="return confirm('Delete this album and all its photos?')">
                 @csrf
                 @method('DELETE')

@@ -64,10 +64,6 @@ class PhotoController extends Controller
 
     public function show(Photo $photo, Request $request)
     {
-        if ($photo->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
-            abort(403);
-        }
-
         $photo->load('album', 'user');
 
         return view('photos.show', compact('photo'));
