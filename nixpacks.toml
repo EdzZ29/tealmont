@@ -4,11 +4,11 @@ nixPkgs = ['php82', 'php82Extensions.pgsql', 'php82Extensions.pdo_pgsql', 'php82
 [phases.install]
 cmds = [
     'mkdir -p /etc/php',
-    'echo "memory_limit=256M\nupload_max_filesize=20M\npost_max_size=25M" > /etc/php/php.ini',
+    'echo "memory_limit=256M\nupload_max_filesize=20M\npost_max_size=25M\nextension=pdo_pgsql\nextension=pgsql\nextension=gd\nextension=mbstring\nextension=xml\nextension=curl\nextension=fileinfo\nextension=bcmath" > /etc/php/php.ini',
     'composer install --no-dev --optimize-autoloader',
     'npm ci',
     'npm run build'
 ]
 
 [start]
-cmd = 'php artisan migrate --force && php artisan storage:link && php artisan optimize && php -S 0.0.0.0:${PORT:-8080} -t public'
+cmd = 'php artisan migrate --force && php artisan optimize && php -S 0.0.0.0:${PORT:-8080} -t public'
