@@ -6,8 +6,8 @@
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full">
             <div class="text-center mb-8">
-                <img src="{{ asset('image/tealmont-logo.jpg') }}" alt="Tealmont" class="mx-auto h-16 w-auto">
-                <h2 class="mt-4 text-3xl font-bold text-gray-900">Tealmont Image Organizer</h2>
+                <img src="{{ asset('image/tealmont-logo-transparent.png') }}" alt="Tealmont" class="mx-auto h-24 w-auto">
+                <h2 class="mt-4 text-3xl font-bold text-gray-900">Tealmont Image Management System</h2>
                 <p class="mt-2 text-sm text-gray-600">Sign in to your account</p>
             </div>
 
